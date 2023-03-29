@@ -8,7 +8,7 @@ public class Ghost : MonoBehaviour
 
     public Tile tile;
     public Board board;
-    public Piece trackingPiece;
+    public ActivePiece1 trackingPiece;
     
 
     public Tilemap tilemap { get; private set; }

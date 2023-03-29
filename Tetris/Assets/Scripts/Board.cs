@@ -10,7 +10,7 @@ public class Board : MonoBehaviour
 {
     public Tilemap tilemap { get; private set; }
     public TetrominoData[] tetrominos;
-    public Piece activePiece1 { get; private set; }
+    public ActivePiece1 activePiece1 { get; private set; }
     public ActivePiece2 activePiece2 { get; private set; }
     public Vector3Int spawnPosition1;
     public Vector3Int spawnPosition2;
@@ -30,7 +30,7 @@ public class Board : MonoBehaviour
     {
         this.activePiece2 = GetComponentInChildren<ActivePiece2>();
         //activePiece2.isPlayer1 = false;
-        this.activePiece1 = GetComponentInChildren<Piece>();
+        this.activePiece1 = GetComponentInChildren<ActivePiece1>();
         //pieces.Add(this.activePiece1);
         //activePiece1.isPlayer1 = true;
 

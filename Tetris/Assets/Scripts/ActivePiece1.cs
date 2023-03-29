@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Piece : Blocks
+public class ActivePiece1 : Blocks
 {
 
 
