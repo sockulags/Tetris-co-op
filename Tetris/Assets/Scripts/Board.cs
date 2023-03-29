@@ -1,6 +1,7 @@
-using Assets.Scripts;
+
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.Tilemaps;
@@ -10,11 +11,12 @@ public class Board : MonoBehaviour
     public Tilemap tilemap { get; private set; }
     public TetrominoData[] tetrominos;
     public Piece activePiece1 { get; private set; }
-    public Piece activePiece2 { get; private set; }
-    public Vector3Int spawnPosition1 = new Vector3Int(-6, 8, 0);
-    public Vector3Int spawnPosition2 = new Vector3Int(4, 8, 0);
+    public ActivePiece2 activePiece2 { get; private set; }
+    public Vector3Int spawnPosition1;
+    public Vector3Int spawnPosition2;
     public Vector2Int boardSize = new Vector2Int(20, 20);
     public int clearedLines { get; private set; }
+    
 
 
     public RectInt Bounds
@@ -23,17 +25,14 @@ public class Board : MonoBehaviour
             return new RectInt(position, this.boardSize);
         }
     }
-
-    private void OnGUI()
-    {
-        var score = clearedLines.ToString();
-        GUI.TextArea(new Rect(4,4,score.Length,4), score, 50);
-    }
+    
     private void Awake()
     {
-        this.activePiece2 = GetComponentInChildren<Piece>();
+        this.activePiece2 = GetComponentInChildren<ActivePiece2>();
+        //activePiece2.isPlayer1 = false;
         this.activePiece1 = GetComponentInChildren<Piece>();
-        activePiece1.isPlayer1 = true;
+        //pieces.Add(this.activePiece1);
+        //activePiece1.isPlayer1 = true;
 
         this.tilemap = GetComponentInChildren<Tilemap>();
         for (int i = 0; i < this.tetrominos.Length; i++)
@@ -48,11 +47,17 @@ public class Board : MonoBehaviour
         SpawnPiece(false);
     }
 
+    //private void Update()
+    //{
+    //    activePiece1.Piece1();
+    //    activePiece2.Piece2();
+    //}
+
 
     public void SpawnPiece(bool isPlayer1 )
     {
-        var activePiece = isPlayer1 ? activePiece1 : activePiece2;
-        activePiece.isPlayer1 = isPlayer1;
+        var activePiece = isPlayer1 ? (Blocks)activePiece1 : activePiece2;
+
         var spawnPosition = isPlayer1 ? spawnPosition1 : spawnPosition2;
         int random = Random.Range(0, this.tetrominos.Length);
         TetrominoData data = this.tetrominos[random];
@@ -69,33 +74,13 @@ public class Board : MonoBehaviour
             }
     }
 
-    //public void SpawnPiece2()
-    //{
-        
-    //    int random = Random.Range(0, this.tetrominos.Length);
-    //    TetrominoData data = this.tetrominos[random];
-
-    //    this.activePiece2.Initialize(this, spawnPosition2, data);
-
-    //    if (IsValidPosition(this.activePiece2, spawnPosition2))
-    //    {
-
-    //        Set(this.activePiece2);
-            
-    //    }
-    //    else
-    //    {
-
-    //        GameOver();
-    //    }
-    //}
 
     private void GameOver()
     {
         this.tilemap.ClearAllTiles();
     }
 
-    public void Set(Piece piece)
+    public void Set(Blocks piece)
     {
         for (int i = 0; i < piece.cells.Length; i++)
         {
@@ -105,7 +90,7 @@ public class Board : MonoBehaviour
        
     }
 
-    public void Clear(Piece piece)
+    public void Clear(Blocks piece)
     {
         for (int i = 0; i < piece.cells.Length; i++)
         {
@@ -114,7 +99,7 @@ public class Board : MonoBehaviour
         }
     }
 
-    public bool IsValidPosition(Piece piece, Vector3Int position)
+    public bool IsValidPosition(Blocks piece, Vector3Int position)
     {
         RectInt bounds = this.Bounds;
         for (int i = 0; i < piece.cells.Length; i++)
@@ -126,10 +111,6 @@ public class Board : MonoBehaviour
 
             if (this.tilemap.HasTile(tilePosition))
                 return false;
-            //if (tilePosition == activePiece2.Position)
-            //{
-            //    return false;
-            //}
 
         }
         return true;

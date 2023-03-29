@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Piece : Blocks
+public class ActivePiece2 : Blocks
 {
 
 
@@ -88,14 +88,6 @@ this.lockTime += Time.deltaTime;
        
         
     }
-
-
-
-
-
-
-
-
 
 
 
