@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.Tilemaps;
@@ -138,7 +140,13 @@ public class Board : MonoBehaviour
 
     private void LineClear(int row)
     {
-        //var activePiece = activePiece1 ?? activePiece2;
+        var activePiece = activePiece1.Position.y > activePiece2.Position.y ? (Blocks)activePiece1 : activePiece2;
+        Vector3Int[] activePiecePositions = new Vector3Int[activePiece.cells.Length];
+        for (int i = 0; i < activePiece.cells.Length; i++)
+        {
+            activePiecePositions[i] = activePiece.cells[i] + activePiece.Position;
+        }
+
         RectInt bounds = this.Bounds;
         for (int col = bounds.xMin; col < bounds.xMax; col++)
         {
@@ -151,17 +159,29 @@ public class Board : MonoBehaviour
             for (int col = bounds.xMin; col < bounds.xMax; col++)
             {
              
-                Vector3Int position = new Vector3Int(col, row + 1, 0);
-                //Vector3Int currentPosition = new Vector3Int(col, row, 0);
-                TileBase above = this.tilemap.GetTile(position);
-                //TileBase current = this.tilemap.GetTile(currentPosition);
+                Vector3Int abovePosition = new Vector3Int(col, row + 1, 0);
                 
+                TileBase above = this.tilemap.GetTile(abovePosition);
+              
 
-                position = new Vector3Int(col, row, 0);
-                
-                this.tilemap.SetTile(position,/* (position == this.activePiece1.Position || position == this.activePiece2.Position) ? current :*/ above);
-                //this.activePiece1 = ap1;
-                //this.activePiece2 = ap2;
+
+                Vector3Int currentPosition = new Vector3Int(col, row, 0);
+                TileBase current = this.tilemap.GetTile(currentPosition);
+                if (activePiecePositions.Contains(currentPosition) ||activePiecePositions.Contains(abovePosition))
+                {
+                    this.tilemap.SetTile(currentPosition, null);
+
+                }
+                //else if(activePiece.Position == abovePosition)
+                //{
+                //    this.tilemap.SetTile(currentPosition, current);
+                //}
+                else
+                {
+                    this.tilemap.SetTile(currentPosition, above);
+                }
+                    
+              
             }
             row++;
         }

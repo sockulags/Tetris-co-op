@@ -23,7 +23,7 @@ public class ActivePiece2 : Blocks
         {
             Rotate(-1);
         }
-  
+
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             Move(Vector2Int.left);
