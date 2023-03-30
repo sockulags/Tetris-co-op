@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Ghost2 : MonoBehaviour
+public class Ghost : MonoBehaviour
 {
 
     public Tile tile;
     public Board board;
-    public ActivePiece2 trackingPiece;
+    public Block trackingPiece;
     
 
     public Tilemap tilemap { get; private set; }
