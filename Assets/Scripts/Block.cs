@@ -16,7 +16,7 @@ public class Block : MonoBehaviour
     public float stepDelay = 1f;
     public float lockDelay = 0.1f;
 
-    public bool isPlayer1 { get; set; }
+    public bool isPlayer1;
 
     internal float stepTime;
     internal float lockTime;
@@ -28,12 +28,7 @@ public class Block : MonoBehaviour
         this.data = data;
         this.stepTime = Time.time + this.stepDelay;
         this.lockTime = 0f;
-        if (this.Position == new Vector3Int(-6, 8, 0))
-        {
-            this.isPlayer1 = true;
-        }
-        else
-            this.isPlayer1 = false;
+     
         if (this.cells == null)
         {
             this.cells = new Vector3Int[data.cells.Length];
@@ -43,9 +38,93 @@ public class Block : MonoBehaviour
         {
             this.cells[i] = (Vector3Int)data.cells[i];
         }
-      
-  
+
+
     }
+
+
+    public void Update()
+    {
+
+        Board.Clear(this);
+
+        this.lockTime += Time.deltaTime;
+
+        if (isPlayer1)
+        {
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                Rotate(-1);
+            }
+            else if (Input.GetKeyDown(KeyCode.E))
+                Rotate(1);
+
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                Move(Vector2Int.left);
+            }
+            else if (Input.GetKeyDown(KeyCode.D))
+            {
+                Move(Vector2Int.right);
+            }
+
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                Move(Vector2Int.down);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                HardDrop();
+            }
+            if (Time.time >= this.stepTime)
+            {
+                Step();
+            }
+        }
+        else
+        {
+       
+
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                Rotate(-1);
+            }
+
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                Move(Vector2Int.left);
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                Move(Vector2Int.right);
+            }
+
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                Move(Vector2Int.down);
+            }
+
+            if (Input.GetKeyDown(KeyCode.RightShift))
+            {
+                HardDrop();
+            }
+            if (Time.time >= this.stepTime)
+            {
+                Step();
+            }
+
+
+        }
+
+
+
+        Board.Set(this);
+
+
+    }
+
 
     internal void Step()
     {

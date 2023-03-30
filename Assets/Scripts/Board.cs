@@ -12,8 +12,8 @@ public class Board : MonoBehaviour
 {
     public Tilemap tilemap { get; private set; }
     public TetrominoData[] tetrominos;
-    public ActivePiece1 activePiece1 { get; private set; }
-    public ActivePiece2 activePiece2 { get; private set; }
+    public Block activePiece1;
+    public Block activePiece2;
     public Vector3Int spawnPosition1;
     public Vector3Int spawnPosition2;
     public Vector2Int boardSize = new Vector2Int(20, 20);
@@ -30,9 +30,9 @@ public class Board : MonoBehaviour
     
     private void Awake()
     {
-        this.activePiece2 = GetComponentInChildren<ActivePiece2>();
-        //activePiece2.isPlayer1 = false;
-        this.activePiece1 = GetComponentInChildren<ActivePiece1>();
+        //this.activePiece2 = GetComponentInChildren<ActivePiece2>();
+        ////activePiece2.isPlayer1 = false;
+        //this.activePiece1 = GetComponentInChildren<ActivePiece1>();
         //pieces.Add(this.activePiece1);
         //activePiece1.isPlayer1 = true;
 
