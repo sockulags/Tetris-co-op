@@ -422,6 +422,7 @@ GameObject:
   - component: {fileID: 1082363402}
   - component: {fileID: 1082363401}
   - component: {fileID: 1082363403}
+  - component: {fileID: 1082363404}
   m_Layer: 0
   m_Name: Ghost
   m_TagString: Untagged
@@ -472,6 +473,21 @@ MonoBehaviour:
   tile: {fileID: 11400000, guid: c8a7bb5c7e52b4c4a87629186800ae2a, type: 2}
   board: {fileID: 1303463116}
   trackingPiece: {fileID: 1303463117}
+--- !u!114 &1082363404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1082363399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 684312959072ba844a1216ed3b119ac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tile: {fileID: 11400000, guid: c8a7bb5c7e52b4c4a87629186800ae2a, type: 2}
+  board: {fileID: 1303463116}
+  trackingPiece: {fileID: 1303463118}
 --- !u!1 &1224115607
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,6 +620,7 @@ GameObject:
   - component: {fileID: 1303463114}
   - component: {fileID: 1303463116}
   - component: {fileID: 1303463117}
+  - component: {fileID: 1303463118}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -683,7 +700,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stepDelay: 1
   lockDelay: 0.1
-  isPlayer1: 0
+--- !u!114 &1303463118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303463113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 048791fbf1a7aa540bf2e55d711ffd19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stepDelay: 1
+  lockDelay: 0.1
 --- !u!1 &1313657533
 GameObject:
   m_ObjectHideFlags: 0
