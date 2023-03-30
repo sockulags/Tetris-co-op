@@ -6,7 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Blocks : MonoBehaviour
+public class Block : MonoBehaviour
 {
     public Board Board { get; private set; }
     public TetrominoData data { get; private set; }

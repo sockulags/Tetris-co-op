@@ -58,7 +58,7 @@ public class Board : MonoBehaviour
 
     public void SpawnPiece(bool isPlayer1 )
     {
-        var activePiece = isPlayer1 ? (Blocks)activePiece1 : activePiece2;
+        var activePiece = isPlayer1 ? (Block)activePiece1 : activePiece2;
 
         var spawnPosition = isPlayer1 ? spawnPosition1 : spawnPosition2;
         int random = Random.Range(0, this.tetrominos.Length);
@@ -82,7 +82,7 @@ public class Board : MonoBehaviour
         this.tilemap.ClearAllTiles();
     }
 
-    public void Set(Blocks piece)
+    public void Set(Block piece)
     {
         for (int i = 0; i < piece.cells.Length; i++)
         {
@@ -92,7 +92,7 @@ public class Board : MonoBehaviour
        
     }
 
-    public void Clear(Blocks piece)
+    public void Clear(Block piece)
     {
         for (int i = 0; i < piece.cells.Length; i++)
         {
@@ -101,7 +101,7 @@ public class Board : MonoBehaviour
         }
     }
 
-    public bool IsValidPosition(Blocks piece, Vector3Int position)
+    public bool IsValidPosition(Block piece, Vector3Int position)
     {
         RectInt bounds = this.Bounds;
         for (int i = 0; i < piece.cells.Length; i++)
@@ -140,7 +140,7 @@ public class Board : MonoBehaviour
 
     private void LineClear(int row)
     {
-        var activePiece = activePiece1.Position.y > activePiece2.Position.y ? (Blocks)activePiece1 : activePiece2;
+        var activePiece = activePiece1.Position.y > activePiece2.Position.y ? (Block)activePiece1 : activePiece2;
         Vector3Int[] activePiecePositions = new Vector3Int[activePiece.cells.Length];
         for (int i = 0; i < activePiece.cells.Length; i++)
         {
@@ -172,11 +172,7 @@ public class Board : MonoBehaviour
                     this.tilemap.SetTile(currentPosition, null);
 
                 }
-                //else if(activePiece.Position == abovePosition)
-                //{
-                //    this.tilemap.SetTile(currentPosition, current);
-                //}
-                else
+                 else
                 {
                     this.tilemap.SetTile(currentPosition, above);
                 }
